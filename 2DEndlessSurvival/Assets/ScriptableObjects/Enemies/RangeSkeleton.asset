@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34858211f427a9e40917bd2b274fde72, type: 3}
+  m_Name: RangeSkeleton
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 89852530218555966, guid: d538cf4ad84543b428e3f0f641ebe851, type: 3}
+  sprite: {fileID: 4723107735738678597, guid: 705072a1ff772ca4a86fccc386c76265, type: 3}
+  objectName: ArcherSke

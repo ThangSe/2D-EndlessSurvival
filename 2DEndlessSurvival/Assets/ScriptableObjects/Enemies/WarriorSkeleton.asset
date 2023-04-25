@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34858211f427a9e40917bd2b274fde72, type: 3}
+  m_Name: WarriorSkeleton
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 89852530218555966, guid: 4fbff4f7bf640694a9b3ebb24c113d91, type: 3}
+  sprite: {fileID: 4723107735738678597, guid: 0a19313b9f5d0994db7ed9e3f414a5a8, type: 3}
+  objectName: WarriorSkeleton
