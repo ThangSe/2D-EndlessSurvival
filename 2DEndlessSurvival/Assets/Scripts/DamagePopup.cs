@@ -31,7 +31,7 @@ public class DamagePopup : MonoBehaviour
         if(isCrit)
         {
             textMesh.fontSize = 5;
-            ColorUtility.TryParseHtmlString("#EA0837", out newColor);
+            ColorUtility.TryParseHtmlString("#F11611", out newColor);
             textColor = newColor;
         } else
         {

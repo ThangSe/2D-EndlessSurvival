@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490e863c67880e940831650e55e1dd5b, type: 3}
+  m_Name: AudioClipRefsSO
+  m_EditorClassIdentifier: 
+  spellCasting:
+  - {fileID: 8300000, guid: 7e5247ca0e361af49869fa06c730f825, type: 3}
+  rangeAttack:
+  - {fileID: 8300000, guid: 59d30d03fcbb65147a118e6d2fd71f82, type: 3}
+  meleeAttack:
+  - {fileID: 8300000, guid: 84b7a0ef3a3ed9240a27513008e3cddf, type: 3}
+  walking:
+  - {fileID: 8300000, guid: e9d329f5ceccab14aaae99dc5bd88a99, type: 3}
+  - {fileID: 8300000, guid: b6556b7bfc2ab1640a80c087460506dd, type: 3}
+  running:
+  - {fileID: 8300000, guid: 411b7062a4fd7d545b703f295a8ec9bf, type: 3}
+  - {fileID: 8300000, guid: f491e1734b6ff7c42aeae9e82462adbf, type: 3}
+  skeletonWalking:
+  - {fileID: 8300000, guid: 3aca14038ae21d440980f746ce85f0e4, type: 3}
+  - {fileID: 8300000, guid: 715f4f7847146054fbc27b9e7d595e41, type: 3}
+  - {fileID: 8300000, guid: 2c9392597eb6f83479ae89122591f33b, type: 3}
+  - {fileID: 8300000, guid: b5626b0c38d8987458c0cba46b3b203b, type: 3}
+  - {fileID: 8300000, guid: 53895308c293da24caccc9f4e33ab170, type: 3}
+  - {fileID: 8300000, guid: d0f60bdb59f656c42b55db1cc2f6c4d3, type: 3}
+  skeletonMelleAttack:
+  - {fileID: 8300000, guid: 3911fcde1b5e4ea48a3bfa1c4eae96c5, type: 3}
+  - {fileID: 8300000, guid: f08aa7f8f8f6aab4da3aeaba156ad8e7, type: 3}
+  - {fileID: 8300000, guid: 123a5f57f0d87d7419ada28666c750b8, type: 3}
+  skeletonRangeAttack:
+  - {fileID: 8300000, guid: c46e59ef4b1bc884d954278a0d2a03f8, type: 3}
+  - {fileID: 8300000, guid: 74977a2866b125a43939fd1cf6e59ec9, type: 3}
+  skeletonBlock:
+  - {fileID: 8300000, guid: 0a86df466bb17454fa4f28de68457b39, type: 3}
+  - {fileID: 8300000, guid: 758e8c9e28d570b45a4c20178ac92b5c, type: 3}
+  - {fileID: 8300000, guid: 025ef25c92b9af84a9ddea11bf4fb9c4, type: 3}
+  arrowHit:
+  - {fileID: 8300000, guid: 94f07b159d0d60f4a87557f565e1e8be, type: 3}

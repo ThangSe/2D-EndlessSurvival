@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SkeletonArrow : MonoBehaviour
 {
+
     private Vector3 shootDir;
     [SerializeField] private float moveSpeed = 10f;
 
@@ -29,13 +30,14 @@ public class SkeletonArrow : MonoBehaviour
     {
         if(boxCillider2d.IsTouchingLayers(1 << LayerMask.NameToLayer("Player")))
         {
+            SoundManager.Instance.PlayArrowHitSound(transform.position);
             float critChance = .33f;
             int damage = 5;
             bool isCrit = false;
             Player damageable = collision.GetComponent<Player>();
             if (damageable != null)
             {
-                if (Random.Range(0f, 1f) > (1 - critChance))
+                if (UnityEngine.Random.Range(0f, 1f) > (1 - critChance))
                 {
                     damage *= 2;
                     isCrit = true;

@@ -5,6 +5,8 @@ using System;
 
 public class EnemyAnimations : MonoBehaviour
 {
+    public static EnemyAnimations Instance { get; private set; }
+
     public event EventHandler OnAttackAction;
     public event EventHandler OnDeathAction;
     public event EventHandler OnDeathEffect;
@@ -26,6 +28,7 @@ public class EnemyAnimations : MonoBehaviour
     private Animator animator;
     private void Awake()
     {
+        Instance = this;
         animator = GetComponent<Animator>();
         enemy.OnAttacked += Enemy_OnAttacked;
         enemyAI.OnAttackAction += EnemyAI_OnAttackAction;

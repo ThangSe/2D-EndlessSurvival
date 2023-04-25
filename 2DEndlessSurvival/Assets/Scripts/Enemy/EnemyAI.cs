@@ -5,6 +5,7 @@ using System;
 
 public class EnemyAI : MonoBehaviour
 {  
+    public static EnemyAI Instance { get; private set; }
     private enum State{
         Roaming,
         ChaseTarget,
@@ -45,6 +46,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         state = State.Roaming;
         rigidBody2D = transform.GetComponent<Rigidbody2D>();
         boxCillider2D = transform.GetComponent<BoxCollider2D>();
@@ -60,6 +62,7 @@ public class EnemyAI : MonoBehaviour
 
     private void EnemyAnimations_OnRangeAttackAction(object sender, EventArgs e)
     {
+        SoundManager.Instance.PlaySkeletonShotArrow(transform.position);
         Transform arrowTransform = Instantiate(CommonAssetsUsing.i.pfSkeletonArrow, transform.Find("ArrowPoint").position, Quaternion.identity);
         Vector3 shootDir = new Vector3();
         if (transform.localScale.x == 1)
@@ -75,6 +78,7 @@ public class EnemyAI : MonoBehaviour
 
     private void EnemyAnimations_OnAttackAction(object sender, EventArgs e)
     {
+        SoundManager.Instance.PlaySkeletonMeeleAttack(transform.position);
         Collider2D[] colliderPlayers = Physics2D.OverlapCircleAll(transform.Find("AttackPoint").position, attackRadius, LayerMask.GetMask("Player"));
         Hit(colliderPlayers, normalDamage);
     }
@@ -201,6 +205,7 @@ public class EnemyAI : MonoBehaviour
     private IEnumerator CooldownShootingArrow(float delayTime, bool cooldownHit)
     {
         this.cooldownHit = !cooldownHit;
+        SoundManager.Instance.PlaySkeletonDrawBow(transform.position);
         OnRangeAttackAction?.Invoke(this, EventArgs.Empty);
         yield return new WaitForSeconds(delayTime);
         this.cooldownHit = cooldownHit;

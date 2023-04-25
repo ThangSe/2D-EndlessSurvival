@@ -45,3 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfDamagePopup: {fileID: 2087616076448410841, guid: 3e5251a61455fa4468aacec30ed55a93, type: 3}
   pfSkeletonArrow: {fileID: 6600722914714290025, guid: f060af8f3053f284cbb37a810d27b10a, type: 3}
+  soundAudioClipArray:
+  - sound: 0
+    audioClip: {fileID: 8300000, guid: 020a2f3fa99d12048b319af6964f225f, type: 3}
+  - sound: 1
+    audioClip: {fileID: 8300000, guid: b922a0fe692a7be47bc5a87aa442ce27, type: 3}
