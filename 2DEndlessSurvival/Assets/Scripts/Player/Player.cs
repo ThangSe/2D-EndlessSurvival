@@ -36,6 +36,7 @@ public class Player : MonoBehaviour, IDamageable
     private bool isRunning;
     private bool isWalking;
     private bool isAttacking = false;
+    private bool isDeath = false;
     private bool flag = false;
     private float moveSpeedMultipler = 1f;
     private float lockPos = 0;
@@ -96,6 +97,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void GameInput_OnCastingAttackAction(object sender, EventArgs e)
     {
+        if (!EndlessSurvivalManager.Instance.IsGamePlaying()) return;
         if (IsGrounded() && (Time.time - lastAttack) > cooldownRangeAttack)
         {
             
@@ -126,6 +128,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void GameInput_OnStrongAttackAction(object sender, EventArgs e)
     {
+        if (!EndlessSurvivalManager.Instance.IsGamePlaying()) return;
         if (IsGrounded() && (Time.time - lastAttack) > cooldownAttack)
         {
             StrongAttackingAction?.Invoke(this, EventArgs.Empty);
@@ -169,6 +172,8 @@ public class Player : MonoBehaviour, IDamageable
 
     private void GameInput_OnRangeAttackAction(object sender, EventArgs e)
     {
+        if (!EndlessSurvivalManager.Instance.IsGamePlaying()) return;
+
         if (IsGrounded() && (Time.time - lastAttack) > cooldownRangeAttack)
         {
             RangeAttackAction?.Invoke(this, EventArgs.Empty);           
@@ -178,6 +183,8 @@ public class Player : MonoBehaviour, IDamageable
 
     private void GameInput_OnAttackAction(object sender, System.EventArgs e)
     {
+        if (!EndlessSurvivalManager.Instance.IsGamePlaying()) return;
+
         if (IsGrounded() && (Time.time - lastAttack) > cooldownAttack)
         {
             AttackingAction?.Invoke(this, EventArgs.Empty);
@@ -187,7 +194,9 @@ public class Player : MonoBehaviour, IDamageable
 
     private void GameInput_OnJumpAction(object sender, System.EventArgs e)
     {
-        if(IsGrounded() && playerAnimations.canMove())
+        if (!EndlessSurvivalManager.Instance.IsGamePlaying()) return;
+
+        if (IsGrounded() && playerAnimations.canMove())
         {
             rigidbody2d.velocity = Vector2.up * jumpVelocity;
         }
@@ -252,6 +261,8 @@ public class Player : MonoBehaviour, IDamageable
 
     private void HandleMovement()
     {
+        if (!EndlessSurvivalManager.Instance.IsGamePlaying()) return;
+
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0f, 0f);
         bool canMove = !Physics2D.BoxCast(boxCillider2d.bounds.center, boxCillider2d.bounds.size, 0f, moveDir, .1f, wallLayerMask);
@@ -285,12 +296,17 @@ public class Player : MonoBehaviour, IDamageable
         healthSystem.Damage(damage);
         if (healthSystem.GetHealth() <= 0)
         {
-            Debug.Log("Die");
+            isDeath = true;
         }
         else
         {
             Debug.Log(healthSystem.GetHealth());
             //OnAttacked?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    public bool IsDeath()
+    {
+        return isDeath;
     }
 }

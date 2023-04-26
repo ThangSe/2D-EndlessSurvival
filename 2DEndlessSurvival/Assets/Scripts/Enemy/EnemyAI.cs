@@ -42,6 +42,10 @@ public class EnemyAI : MonoBehaviour
     private float dodgeSpeed;
     private float blockTimer;
     private bool cooldownDodge;
+    private float footSteepTimer;
+    private float footSteepTimerMax = .2f;
+    private int stepNumReset = 0;
+    private int walkingNum;
     private State state;
 
     private void Awake()
@@ -85,10 +89,23 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (!EndlessSurvivalManager.Instance.IsGamePlaying()) return;
+
         if (!IsGrounded())
         {
             movementVector.y += Physics2D.gravity.y * Time.deltaTime;
             rigidBody2D.MovePosition(rigidBody2D.position + movementVector * Time.deltaTime);
+        }
+        footSteepTimer -= Time.deltaTime;
+        if (footSteepTimer < 0f)
+        {
+            footSteepTimer = footSteepTimerMax;
+            if (IsWalking() && IsGrounded() && EnemyAnimations.Instance.canMove())
+            {
+                SoundManager.Instance.PlayeSkeletonWalking(transform.position, walkingNum);
+                walkingNum++;
+                if (walkingNum > 5) walkingNum = stepNumReset;
+            }
         }
         switch (state)
         {

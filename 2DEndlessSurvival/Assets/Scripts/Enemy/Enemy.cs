@@ -75,7 +75,11 @@ public class Enemy : MonoBehaviour, IDamageable
             {
                 OnAttacked?.Invoke(this, EventArgs.Empty);
             }
-        }        
+        }
+        if (!isDeath && enemyAnimations.IsProtect())
+        {
+            SoundManager.Instance.PlaySkeletonBlock(transform.position);
+        }
     }
 
     public Vector3 GetPosition()

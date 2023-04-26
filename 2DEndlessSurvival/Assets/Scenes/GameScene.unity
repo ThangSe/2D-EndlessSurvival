@@ -222,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 89852530218555966, guid: d538cf4ad84543b428e3f0f641ebe851, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.79
+      value: 15.46
       objectReference: {fileID: 0}
     - target: {fileID: 89852530218555966, guid: d538cf4ad84543b428e3f0f641ebe851, type: 3}
       propertyPath: m_LocalPosition.y
@@ -283,7 +283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 89852530218555966, guid: d538cf4ad84543b428e3f0f641ebe851, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.95
+      value: 17.96
       objectReference: {fileID: 0}
     - target: {fileID: 89852530218555966, guid: d538cf4ad84543b428e3f0f641ebe851, type: 3}
       propertyPath: m_LocalPosition.y
@@ -593,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 89852530218555966, guid: 4fbff4f7bf640694a9b3ebb24c113d91, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.33
+      value: 13.63
       objectReference: {fileID: 0}
     - target: {fileID: 89852530218555966, guid: 4fbff4f7bf640694a9b3ebb24c113d91, type: 3}
       propertyPath: m_LocalPosition.y
@@ -847,7 +847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 89852530218555966, guid: 4fbff4f7bf640694a9b3ebb24c113d91, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.69
+      value: 11.18
       objectReference: {fileID: 0}
     - target: {fileID: 89852530218555966, guid: 4fbff4f7bf640694a9b3ebb24c113d91, type: 3}
       propertyPath: m_LocalPosition.y
@@ -939,6 +939,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &734419320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 734419321}
+  - component: {fileID: 734419322}
+  m_Layer: 0
+  m_Name: EndlessSurvivalManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &734419321
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734419320}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &734419322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734419320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907ee2fa13ac0094097f298ecd1e9605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &910774340
 GameObject:
   m_ObjectHideFlags: 0

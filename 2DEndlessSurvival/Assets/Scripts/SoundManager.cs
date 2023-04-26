@@ -50,20 +50,15 @@ public class SoundManager: MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(audioClip, position, volume);
     }
-    private void PlaySoundFootSteep(AudioClip[] audioClipArray, int num, Vector3 position, float volume = 1f)
-    {
-
-        PlaySound(audioClipArray[num], position, volume);
-    }
 
     public void PlayWalkingSound(Vector3 position, int num, float volume)
     {
-        PlaySoundFootSteep(audioClipRefsSO.walking, num, position, volume);
+        PlaySound(audioClipRefsSO.walking, position, num, volume);
     }
 
     public void PlayRunningSound(Vector3 position, int num, float volume)
     {
-        PlaySoundFootSteep(audioClipRefsSO.running, num, position, volume);
+        PlaySound(audioClipRefsSO.running, position, num, volume);
     }
 
     public void PlayArrowHitSound(Vector3 position)
@@ -85,5 +80,17 @@ public class SoundManager: MonoBehaviour
     {
         int arrowShot = 1;
         PlaySound(audioClipRefsSO.skeletonRangeAttack, position, arrowShot);
+    }
+
+    public void PlaySkeletonBlock(Vector3 position)
+    {
+        int randomSound = Random.Range(0, audioClipRefsSO.skeletonBlock.Length);
+        PlaySound(audioClipRefsSO.skeletonBlock, position, randomSound);
+    }
+
+    public void PlayeSkeletonWalking(Vector3 position, int num)
+    {
+        float volume = .3f;
+        PlaySound(audioClipRefsSO.skeletonWalking, position, num, volume);
     }
 }
