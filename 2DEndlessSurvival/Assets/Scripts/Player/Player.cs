@@ -28,6 +28,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float cooldownRangeAttack = .5f;
     [SerializeField] private GameInput gameInput;
 
+    //private bool isAttacking = false;
     private int normalDamage = 20;
     private float critChance = .33f;
     private float lastAttack;
@@ -35,7 +36,6 @@ public class Player : MonoBehaviour, IDamageable
     private Rigidbody2D rigidbody2d;
     private bool isRunning;
     private bool isWalking;
-    private bool isAttacking = false;
     private bool isDeath = false;
     private bool flag = false;
     private float moveSpeedMultipler = 1f;
@@ -233,14 +233,14 @@ public class Player : MonoBehaviour, IDamageable
         return isRunning;
     }
 
-    public bool IsAttacking()
+    /*public bool IsAttacking()
     {
         return isAttacking;
     }
     public void NotAttacking()
     {
         isAttacking = false;
-    }
+    }*/
     public bool IsGrounded()
     {
         RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCillider2d.bounds.center, boxCillider2d.bounds.size, 0f, Vector2.down, .1f, platformsLayerMask);

@@ -46,6 +46,7 @@ public class EnemyAI : MonoBehaviour
     private float footSteepTimerMax = .2f;
     private int stepNumReset = 0;
     private int walkingNum;
+    private int walkingReset = 0;
     private State state;
 
     private void Awake()
@@ -100,7 +101,7 @@ public class EnemyAI : MonoBehaviour
         if (footSteepTimer < 0f)
         {
             footSteepTimer = footSteepTimerMax;
-            if (IsWalking() && IsGrounded() && EnemyAnimations.Instance.canMove())
+            if (IsWalking() && IsGrounded())
             {
                 SoundManager.Instance.PlayeSkeletonWalking(transform.position, walkingNum);
                 walkingNum++;
@@ -297,6 +298,7 @@ public class EnemyAI : MonoBehaviour
     {        
         Vector3 currentPosition = transform.position;
         transform.position = currentPosition;
+        walkingNum = walkingReset;
         isWalking = false;
     }
 

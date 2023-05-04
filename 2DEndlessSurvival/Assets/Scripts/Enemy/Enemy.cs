@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     public event EventHandler OnAttacked;
     public event EventHandler OnDeath;
+    ScoreManager scoreManager;
 
     [SerializeField] private EnemyAnimations enemyAnimations;
     [SerializeField] private int maxHealth = 100;
@@ -38,6 +39,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Start()
     {
         healthSystem = new HealthSystem(maxHealth);
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         healthSystem.OnHealthChanged += HealthSystem_OnHealthChanged;
         enemyAnimations.OnDeathAction += EnemyAnimations_OnDeathAction;
     }
@@ -69,6 +71,7 @@ public class Enemy : MonoBehaviour, IDamageable
             {
                 enemyList.Remove(this);
                 OnDeath?.Invoke(this, EventArgs.Empty);
+                scoreManager.IncKillCount();
                 isDeath = true;                
             }
             else
