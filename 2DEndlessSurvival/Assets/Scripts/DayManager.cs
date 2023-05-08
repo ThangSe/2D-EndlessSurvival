@@ -8,6 +8,10 @@ public class DayManager : MonoBehaviour
     [SerializeField] private Image endDayTime;
     [SerializeField] private Image dayTime;
     [SerializeField] private Image timerOfDay;
+    [SerializeField] private EnemiesSO[] enemiesSO;
+
+    private float spawnRate = 1f;
+    private float spawnTime;
 
     private enum State
     {
@@ -21,6 +25,7 @@ public class DayManager : MonoBehaviour
     private void Awake()
     {
         state = State.DayTime;
+        spawnTime = spawnRate;
     }
 
     private void Update()
@@ -60,13 +65,30 @@ public class DayManager : MonoBehaviour
                     }
                     break;
                 case State.NightTime:
+                    if(spawnTime >= spawnRate)
+                    {
+                        Instantiate(enemiesSO[Random.Range(0, enemiesSO.Length)].prefab, GetRandomSpawnPostion(), Quaternion.identity);
+                        spawnTime = 0f;
+                        Debug.Log("New enemies");
+                    }
+                    spawnTime += Time.deltaTime;
                     if (timerOfDay.fillAmount >=0 && timerOfDay.fillAmount < dayTime.fillAmount)
                     {
                         state = State.DayTime;
-                        Debug.Log("End night");
                     }
                     break;
             }
         }
     }
+
+    private Vector3 GetRandomSpawnPostion()
+    {
+        float spwanDistanceMax = 30f;
+        float spwanDistanceMin = 20f;
+        Vector3 playerPosition = Player.Instance.GetPosition();
+        Vector3 randomDir = new Vector3(Random.Range(-1f, 1f), 0).normalized;
+        if (playerPosition.x < spwanDistanceMax) randomDir = new Vector3(Random.Range(0f, 1f), 0).normalized;
+        return playerPosition + randomDir * Random.Range(spwanDistanceMax, spwanDistanceMin);
+    }
+
 }

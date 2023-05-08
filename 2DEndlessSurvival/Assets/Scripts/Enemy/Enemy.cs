@@ -89,5 +89,4 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         return transform.position;
     }
-
 }

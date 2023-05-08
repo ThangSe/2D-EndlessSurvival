@@ -22,7 +22,7 @@ public class EndlessSurvivalManager : MonoBehaviour
     private float waitingToStartTimer = 1f;
     private float gamePlayingTimer;
     private float dayTimerNow;
-    private float dayTimerMax = 60f;
+    private float dayTimerMax = 30f;
     private int survivalDay;
     
     private void Awake()

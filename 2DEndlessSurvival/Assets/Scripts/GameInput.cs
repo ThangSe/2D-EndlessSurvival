@@ -12,6 +12,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnRangeAttackAction;
     public event EventHandler OnStrongAttackAction;
     public event EventHandler OnCastingAttackAction;
+    public event EventHandler OnPauseAction;
 
     public class OnToggleShiftEventArgs : EventArgs
     {
@@ -31,6 +32,12 @@ public class GameInput : MonoBehaviour
         inputActions.Player.RangeAttack.performed += RangeAttack_performed;
         inputActions.Player.Attack2.performed += Attack2_performed;
         inputActions.Player.CastingAttack.performed += CastingAttack_performed;
+        inputActions.Player.Pause.performed += Pause_performed;
+    }
+
+    private void Pause_performed(InputAction.CallbackContext obj)
+    {
+        OnPauseAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void CastingAttack_performed(InputAction.CallbackContext obj)

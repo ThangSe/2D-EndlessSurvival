@@ -89,6 +89,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""919a3e01-6a81-46da-b18b-f441cd429974"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""CastingAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62885133-5d24-49a8-a896-b2c4ff18d0d8"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -227,6 +247,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_RangeAttack = m_Player.FindAction("RangeAttack", throwIfNotFound: true);
         m_Player_Attack2 = m_Player.FindAction("Attack2", throwIfNotFound: true);
         m_Player_CastingAttack = m_Player.FindAction("CastingAttack", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -293,6 +314,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RangeAttack;
     private readonly InputAction m_Player_Attack2;
     private readonly InputAction m_Player_CastingAttack;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -304,6 +326,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @RangeAttack => m_Wrapper.m_Player_RangeAttack;
         public InputAction @Attack2 => m_Wrapper.m_Player_Attack2;
         public InputAction @CastingAttack => m_Wrapper.m_Player_CastingAttack;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -334,6 +357,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @CastingAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastingAttack;
                 @CastingAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastingAttack;
                 @CastingAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastingAttack;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -359,6 +385,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @CastingAttack.started += instance.OnCastingAttack;
                 @CastingAttack.performed += instance.OnCastingAttack;
                 @CastingAttack.canceled += instance.OnCastingAttack;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -372,5 +401,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnRangeAttack(InputAction.CallbackContext context);
         void OnAttack2(InputAction.CallbackContext context);
         void OnCastingAttack(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
