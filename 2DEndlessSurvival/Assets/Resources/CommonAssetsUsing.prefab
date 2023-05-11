@@ -45,8 +45,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfDamagePopup: {fileID: 2087616076448410841, guid: 3e5251a61455fa4468aacec30ed55a93, type: 3}
   pfSkeletonArrow: {fileID: 6600722914714290025, guid: f060af8f3053f284cbb37a810d27b10a, type: 3}
-  soundAudioClipArray:
-  - sound: 0
-    audioClip: {fileID: 8300000, guid: 020a2f3fa99d12048b319af6964f225f, type: 3}
-  - sound: 1
-    audioClip: {fileID: 8300000, guid: b922a0fe692a7be47bc5a87aa442ce27, type: 3}
+  pfItemWorld: {fileID: 1592538769170371633, guid: abbb6fb74c4c0f24fbf573bae1fc491a, type: 3}
+  weaponSprite: {fileID: 21300000, guid: 40d526b51d159064f851539ce7779eec, type: 3}
+  healthPotionSprite: {fileID: 21300000, guid: 117b17facff65dc42b1b57deb7c21551, type: 3}
+  coinSprite: {fileID: 21300000, guid: 83f2beb3e2ba2e347b4b0d5d63d0373b, type: 3}
+  monsterPartSprite:
+  - {fileID: 21300000, guid: 844a1050d03ba5046bfb86af34a81e47, type: 3}
+  - {fileID: 21300000, guid: 587503b6015abc741ad5147fff8f4a06, type: 3}
+  - {fileID: 21300000, guid: 4461c87bad5222349b14c22b26d43b95, type: 3}
+  - {fileID: 21300000, guid: 5319e90cdef08eb4a90ed29d73271916, type: 3}
+  - {fileID: 21300000, guid: e577f30c6bd976a429addedf4c4ad662, type: 3}
+  autoDrop:
+  - {fileID: 21300000, guid: 0e1ccb64303778e4081913a6d9cca677, type: 3}
+  - {fileID: 21300000, guid: 966ff550585ec504896a28b55fd7281c, type: 3}
+  - {fileID: 21300000, guid: da7129ed6a246f048a49d8d97de2d2d4, type: 3}

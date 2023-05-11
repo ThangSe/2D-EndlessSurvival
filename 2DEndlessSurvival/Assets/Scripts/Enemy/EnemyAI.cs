@@ -91,12 +91,6 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {
         if (!EndlessSurvivalManager.Instance.IsGamePlaying()) return;
-
-        if (!IsGrounded())
-        {
-            movementVector.y += Physics2D.gravity.y * Time.deltaTime;
-            rigidBody2D.MovePosition(rigidBody2D.position + movementVector * Time.deltaTime);
-        }
         footSteepTimer -= Time.deltaTime;
         if (footSteepTimer < 0f)
         {
@@ -217,6 +211,15 @@ public class EnemyAI : MonoBehaviour
                     state = State.Roaming;
                 }
                 break;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!IsGrounded())
+        {
+            movementVector.y += Physics2D.gravity.y * Time.fixedDeltaTime;
+            rigidBody2D.MovePosition(rigidBody2D.position + movementVector * Time.fixedDeltaTime);
         }
     }
 

@@ -27,6 +27,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float cooldownAttack = 1f;
     [SerializeField] private float cooldownRangeAttack = .5f;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private InventoryUI inventoryUI;
 
     //private bool isAttacking = false;
     private int normalDamage = 20;
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour, IDamageable
     private float moveSpeedMultipler = 1f;
     private float lockPos = 0;
     private HealthSystem healthSystem;
+    private Inventory inventory;
     private void Awake()
     {
         if (Instance != null)
@@ -51,6 +53,14 @@ public class Player : MonoBehaviour, IDamageable
         lastAttack = Time.time;
         rigidbody2d = transform.GetComponent<Rigidbody2D>();
         boxCillider2d = transform.GetComponent<BoxCollider2D>();
+        inventory = new Inventory();
+        inventoryUI.SetInventory(inventory);
+        ItemWorld.SpawnItemWorld(new Vector3(0, 0), new Item { itemType = Item.ItemType.HealthPotion, amount = 5 });
+        ItemWorld.SpawnItemWorld(new Vector3(2, 0), new Item { itemType = Item.ItemType.HealthPotion, amount = 5 });
+        ItemWorld.SpawnItemWorld(new Vector3(4, 0), new Item { itemType = Item.ItemType.HealthPotion, amount = 5 });
+        ItemWorld.SpawnItemWorld(new Vector3(6, 0), new Item { itemType = Item.ItemType.HealthPotion, amount = 5 });
+        ItemWorld.SpawnItemWorld(new Vector3(8, 0), new Item { itemType = Item.ItemType.HealthPotion, amount = 4 });
+        ItemWorld.SpawnItemWorld(new Vector3(10, 0), new Item { itemType = Item.ItemType.HealthPotion, amount = 3 });
     }
 
     private void Start()
@@ -69,6 +79,22 @@ public class Player : MonoBehaviour, IDamageable
         playerAnimations.OnStrongAttackDuelDamage += PlayerAnimations_OnStrongAttackDuelDamage;
         playerAnimations.OnAttackDuelDamage += PlayerAnimations_OnAttackDuelDamage;
         playerAnimations.OnRangeAttackCast += PlayerAnimations_OnRangeAttackCast;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
+        if(itemWorld != null)
+        {
+            int amountLeft = inventory.AddItem(itemWorld.GetItem());
+            if(amountLeft == 0)
+            {
+                itemWorld.DestroySelf();
+            } else
+            {
+                itemWorld.SetAmount(amountLeft);
+            }
+        }
     }
 
     private void PlayerAnimations_OnAttackDuelDamage(object sender, EventArgs e)

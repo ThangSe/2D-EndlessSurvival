@@ -20,4 +20,11 @@ public class CommonAssetsUsing : MonoBehaviour
 
     public Transform pfSkeletonArrow;
 
+    public Transform pfItemWorld;
+
+    public Sprite weaponSprite;
+    public Sprite healthPotionSprite;
+    public Sprite coinSprite;
+    public Sprite[] monsterPartSprite;
+    public Sprite[] autoDrop;
 }

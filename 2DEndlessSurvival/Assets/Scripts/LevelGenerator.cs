@@ -38,7 +38,4 @@ public class LevelGenerator : MonoBehaviour
         return levelPartTransform;
     }
 
-    private void SpawnEnemies()
-    {
-    }
 }
