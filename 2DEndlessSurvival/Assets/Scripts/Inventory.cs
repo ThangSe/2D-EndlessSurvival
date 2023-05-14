@@ -8,11 +8,13 @@ public class Inventory
 {
     public event EventHandler OnItemListChanged;
     private List<Item> itemList;
+    private Action<Item> useItemAction;
     private int maxSlot = 5;
     private int emptySlot;
 
-    public Inventory()
+    public Inventory(Action<Item> useItemAction)
     {
+        this.useItemAction = useItemAction;
         itemList = new List<Item>();
         emptySlot = maxSlot;
     }
@@ -20,6 +22,7 @@ public class Inventory
     public int AddItem(Item item)
     {
         int amountItemAfterPickedUp = 0;
+        if (item.itemType == Item.ItemType.CopperCoin || item.itemType == Item.ItemType.SilverCoin || item.itemType == Item.ItemType.GoldenCoin) return item.amount;
         if(emptySlot > 0)
         {
             if (item.IsStackable())
@@ -31,10 +34,10 @@ public class Inventory
                     if (inventoryItem.itemType == item.itemType)
                     {                        
                         int tryAddAmount = inventoryItem.amount + item.amount;
-                        if(tryAddAmount > item.maxStack())
+                        if(tryAddAmount > item.MaxStack())
                         {
-                            inventoryItem.amount = item.maxStack();
-                            amountNewItemInc = tryAddAmount - item.maxStack();
+                            inventoryItem.amount = item.MaxStack();
+                            amountNewItemInc = tryAddAmount - item.MaxStack();
                             itemNotFullStackInInventory = false;
                         } else
                         {
@@ -64,33 +67,51 @@ public class Inventory
         {
             if (item.IsStackable())
             {
-                if(itemList.Last().itemType == item.itemType)               
+                foreach(Item itemInvetory in itemList)
                 {
-                    int tryAddAmount = itemList.Last().amount + item.amount;
-                    if (tryAddAmount > item.maxStack())
+                    if(itemInvetory.itemType == item.itemType)
                     {
-                        itemList.Last().amount = item.maxStack();
-                        item.amount = tryAddAmount - item.maxStack();
-                        OnItemListChanged?.Invoke(this, EventArgs.Empty);
-                        return tryAddAmount - item.maxStack();
+                        if(itemInvetory.amount < itemInvetory.MaxStack())
+                        {
+                            int tryAddAmount = itemInvetory.amount + item.amount;
+                            if (tryAddAmount > itemInvetory.MaxStack())
+                            {
+                                itemInvetory.amount = itemInvetory.MaxStack();
+                                item.amount = tryAddAmount - itemInvetory.amount;
+                                OnItemListChanged?.Invoke(this, EventArgs.Empty);
+                            }
+                            else
+                            {
+                                itemInvetory.amount += item.amount;
+                                item.amount -= item.amount;
+                                OnItemListChanged?.Invoke(this, EventArgs.Empty);
+                            }
+                        }                    
                     }
-                    else
-                    {
-                        itemList.Last().amount += item.amount;
-                        OnItemListChanged?.Invoke(this, EventArgs.Empty);
-                        return amountItemAfterPickedUp;
-                    }
-                }
-                return item.amount;
-            } else
-            {
-                return item.amount;
-            }                
+                }              
+            }
+            return item.amount;
         }
+    }
+
+    public void RemoveItem(int index)
+    {
+        itemList.RemoveAt(index);
+        emptySlot++;
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public List<Item> GetItemList()
     {
         return itemList;
+    }
+
+    public void UseItem(Item item)
+    {
+        useItemAction(item);
+    }
+    public Item GetItem(int index)
+    {
+        return itemList[index];
     }
 }

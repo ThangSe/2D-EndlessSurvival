@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SkeletonArrow : MonoBehaviour
 {
+    public static event EventHandler OnAnyArrowHit;
 
     private Vector3 shootDir;
     [SerializeField] private float moveSpeed = 10f;
@@ -30,7 +32,7 @@ public class SkeletonArrow : MonoBehaviour
     {
         if(boxCillider2d.IsTouchingLayers(1 << LayerMask.NameToLayer("Player")))
         {
-            SoundManager.Instance.PlayArrowHitSound(transform.position);
+            OnAnyArrowHit?.Invoke(this, EventArgs.Empty);
             float critChance = .33f;
             int damage = 5;
             bool isCrit = false;

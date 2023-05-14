@@ -1,4 +1,6 @@
+using System.Collections;
 using System;
+using UnityEngine;
 public class HealthSystem
 {
     public event EventHandler OnHealthChanged;
@@ -29,9 +31,16 @@ public class HealthSystem
         OnHealthChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public void Heal(int healAmount)
-    {
+    public void UsingPotion(int healAmount)
+    {        
         health += healAmount;
+        if (health > healthMax) health = healthMax;
+        OnHealthChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void HealthRegen()
+    {
+        health++;
         if (health > healthMax) health = healthMax;
         OnHealthChanged?.Invoke(this, EventArgs.Empty);
     }

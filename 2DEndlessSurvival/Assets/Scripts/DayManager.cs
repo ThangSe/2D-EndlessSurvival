@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class DayManager : MonoBehaviour
 {
+    [SerializeField] private Light2D globalLight;
     [SerializeField] private Image endDayTime;
     [SerializeField] private Image dayTime;
     [SerializeField] private Image timerOfDay;
     [SerializeField] private EnemiesSO[] enemiesSO;
+
+    private float lightAtEndDay = .5f;
+    private float lightAtBeginNight = .3f;
+    private float lightAtMidNight = .1f;
+    private float lightAtBeginDay = .5f;
+    private float lightAtMidday = 1.5f;
 
     private float spawnRate = 1f;
     private float spawnTime;
@@ -35,6 +43,7 @@ public class DayManager : MonoBehaviour
             switch (state)
             {
                 case State.DayTime:
+                    
                     if (timerOfDay.fillAmount >= dayTime.fillAmount)
                     {
                         if(SurvivalDayUI.Instance.NormalDay())
@@ -60,6 +69,7 @@ public class DayManager : MonoBehaviour
                 case State.EndDayTime:
                     if (timerOfDay.fillAmount >= endDayTime.fillAmount)
                     {
+                        Player.Instance.LightOn();
                         state = State.NightTime;
                         Debug.Log("Begin Night");
                     }
@@ -74,8 +84,48 @@ public class DayManager : MonoBehaviour
                     spawnTime += Time.deltaTime;
                     if (timerOfDay.fillAmount >=0 && timerOfDay.fillAmount < dayTime.fillAmount)
                     {
+                        Player.Instance.LightOff();
+                        globalLight.intensity = .5f;
                         state = State.DayTime;
                     }
+                    break;
+            }
+        }
+    }
+    private void FixedUpdate()
+    {
+        if(EndlessSurvivalManager.Instance.IsGamePlaying())
+        {          
+            switch(state)
+            {
+                case State.DayTime:
+                    if (timerOfDay.fillAmount < dayTime.fillAmount / 2) 
+                        globalLight.intensity += Time.fixedDeltaTime * (lightAtMidday - lightAtBeginDay) / SurvivalDayUI.Instance.HalfDayToSecond();
+                    if (timerOfDay.fillAmount >= dayTime.fillAmount / 2) 
+                        globalLight.intensity -= Time.fixedDeltaTime * (lightAtMidday - lightAtEndDay) / SurvivalDayUI.Instance.HalfDayToSecond();
+                    break;
+                case State.EndDayTime:
+                    if(SurvivalDayUI.Instance.NormalDay() || SurvivalDayUI.Instance.NormalNightMare()) 
+                        globalLight.intensity -= Time.fixedDeltaTime * (lightAtEndDay - lightAtBeginNight) / SurvivalDayUI.Instance.BeforeNormalNightToSecond();
+                    if(SurvivalDayUI.Instance.LongNight() || SurvivalDayUI.Instance.LongNightMare()) 
+                        globalLight.intensity -= Time.fixedDeltaTime * (lightAtEndDay - lightAtBeginNight) / SurvivalDayUI.Instance.BeforeLongNightToSecond();
+                    break;
+                case State.NightTime:
+                    if(SurvivalDayUI.Instance.NormalDay() || SurvivalDayUI.Instance.NormalNightMare())
+                    {
+                        if (timerOfDay.fillAmount - endDayTime.fillAmount < (1 - endDayTime.fillAmount) / 2) 
+                            globalLight.intensity -= Time.fixedDeltaTime * (lightAtBeginNight - lightAtMidNight) / SurvivalDayUI.Instance.HalfNormalNightToSecond();
+                        if (timerOfDay.fillAmount - endDayTime.fillAmount >= (1 - endDayTime.fillAmount) / 2)
+                            globalLight.intensity += Time.fixedDeltaTime * (lightAtBeginDay - lightAtMidNight) / SurvivalDayUI.Instance.HalfNormalNightToSecond();
+                    }
+                    if (SurvivalDayUI.Instance.LongNight() || SurvivalDayUI.Instance.LongNightMare())
+                    {
+                        if (timerOfDay.fillAmount - endDayTime.fillAmount < (1 - endDayTime.fillAmount) / 2)
+                            globalLight.intensity -= Time.fixedDeltaTime * (lightAtBeginNight - lightAtMidNight) / SurvivalDayUI.Instance.HalfLongNightToSecond();
+                        if (timerOfDay.fillAmount - endDayTime.fillAmount >= (1 - endDayTime.fillAmount) / 2) 
+                            globalLight.intensity += Time.fixedDeltaTime * (lightAtBeginDay - lightAtMidNight) / SurvivalDayUI.Instance.HalfLongNightToSecond();
+                    }
+                    
                     break;
             }
         }

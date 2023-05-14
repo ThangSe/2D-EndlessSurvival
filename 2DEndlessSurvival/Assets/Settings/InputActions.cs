@@ -98,6 +98,51 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem1"",
+                    ""type"": ""Button"",
+                    ""id"": ""22d03308-2b5b-42ba-8547-e0c1a89a3383"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseItem2"",
+                    ""type"": ""Button"",
+                    ""id"": ""18468305-bd78-48bc-bcdc-e20237ed36b9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseItem3"",
+                    ""type"": ""Button"",
+                    ""id"": ""b844f872-0c95-45aa-a0dc-8e2d03df77df"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseItem4"",
+                    ""type"": ""Button"",
+                    ""id"": ""73f54e83-e620-484c-853e-4679d1010885"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseItem5"",
+                    ""type"": ""Button"",
+                    ""id"": ""86a7584e-31c7-4207-aa33-1998225606d4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -232,6 +277,61 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59a87e7b-4411-4847-a161-fb5dabcd12b2"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f69763b-1db0-4937-b087-44c7bd7d55e4"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""083b2eb7-650d-45b1-b071-c6156de7e480"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6258cbf7-305f-4694-9af9-f4d5041d66ac"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5289dba6-4271-4e3f-8130-307d5feb702e"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -248,6 +348,11 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Attack2 = m_Player.FindAction("Attack2", throwIfNotFound: true);
         m_Player_CastingAttack = m_Player.FindAction("CastingAttack", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_UseItem1 = m_Player.FindAction("UseItem1", throwIfNotFound: true);
+        m_Player_UseItem2 = m_Player.FindAction("UseItem2", throwIfNotFound: true);
+        m_Player_UseItem3 = m_Player.FindAction("UseItem3", throwIfNotFound: true);
+        m_Player_UseItem4 = m_Player.FindAction("UseItem4", throwIfNotFound: true);
+        m_Player_UseItem5 = m_Player.FindAction("UseItem5", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +420,11 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack2;
     private readonly InputAction m_Player_CastingAttack;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_UseItem1;
+    private readonly InputAction m_Player_UseItem2;
+    private readonly InputAction m_Player_UseItem3;
+    private readonly InputAction m_Player_UseItem4;
+    private readonly InputAction m_Player_UseItem5;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -327,6 +437,11 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Attack2 => m_Wrapper.m_Player_Attack2;
         public InputAction @CastingAttack => m_Wrapper.m_Player_CastingAttack;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @UseItem1 => m_Wrapper.m_Player_UseItem1;
+        public InputAction @UseItem2 => m_Wrapper.m_Player_UseItem2;
+        public InputAction @UseItem3 => m_Wrapper.m_Player_UseItem3;
+        public InputAction @UseItem4 => m_Wrapper.m_Player_UseItem4;
+        public InputAction @UseItem5 => m_Wrapper.m_Player_UseItem5;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -360,6 +475,21 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @UseItem1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem1;
+                @UseItem1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem1;
+                @UseItem1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem1;
+                @UseItem2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem2;
+                @UseItem2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem2;
+                @UseItem2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem2;
+                @UseItem3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem3;
+                @UseItem3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem3;
+                @UseItem3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem3;
+                @UseItem4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem4;
+                @UseItem4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem4;
+                @UseItem4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem4;
+                @UseItem5.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem5;
+                @UseItem5.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem5;
+                @UseItem5.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem5;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -388,6 +518,21 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @UseItem1.started += instance.OnUseItem1;
+                @UseItem1.performed += instance.OnUseItem1;
+                @UseItem1.canceled += instance.OnUseItem1;
+                @UseItem2.started += instance.OnUseItem2;
+                @UseItem2.performed += instance.OnUseItem2;
+                @UseItem2.canceled += instance.OnUseItem2;
+                @UseItem3.started += instance.OnUseItem3;
+                @UseItem3.performed += instance.OnUseItem3;
+                @UseItem3.canceled += instance.OnUseItem3;
+                @UseItem4.started += instance.OnUseItem4;
+                @UseItem4.performed += instance.OnUseItem4;
+                @UseItem4.canceled += instance.OnUseItem4;
+                @UseItem5.started += instance.OnUseItem5;
+                @UseItem5.performed += instance.OnUseItem5;
+                @UseItem5.canceled += instance.OnUseItem5;
             }
         }
     }
@@ -402,5 +547,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnAttack2(InputAction.CallbackContext context);
         void OnCastingAttack(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnUseItem1(InputAction.CallbackContext context);
+        void OnUseItem2(InputAction.CallbackContext context);
+        void OnUseItem3(InputAction.CallbackContext context);
+        void OnUseItem4(InputAction.CallbackContext context);
+        void OnUseItem5(InputAction.CallbackContext context);
     }
 }

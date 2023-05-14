@@ -1,5 +1,77 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1992335647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1992335648}
+  - component: {fileID: 1992335649}
+  m_Layer: 9
+  m_Name: Point Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1992335648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992335647}
+  m_LocalRotation: {x: -0, y: -0, z: -0.62198687, w: 0.7830277}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5926521509486623358}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1992335649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992335647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.432
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: ab7661e1
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 18.66399
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &5926521509486623359
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +85,7 @@ GameObject:
   - component: {fileID: 5926521509486623357}
   - component: {fileID: 5926521509486623347}
   - component: {fileID: 2067771065029545098}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +104,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1237562220424229598}
+  - {fileID: 1992335648}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95,7 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseHealth: 100
+  baseMana: 100
   playerHealthBar: {fileID: 5495715269136331799, guid: cfdd30260b964df4eab88c579dddadab, type: 3}
+  playerManaBar: {fileID: 5495715269136331799, guid: 299618195491eed4d8d0406e882145d2, type: 3}
   playerAnimations: {fileID: 7439769571746006562}
   pfLightBall: {fileID: 2754694989753371549, guid: 10fcbb461bd8ee04d80e54eb40a778e8, type: 3}
   platformsLayerMask:
@@ -103,12 +178,13 @@ MonoBehaviour:
     m_Bits: 64
   wallLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   jumpVelocity: 7
   moveSpeed: 5
   cooldownAttack: 1
   cooldownRangeAttack: 0.5
   gameInput: {fileID: 0}
+  inventoryUI: {fileID: 0}
 --- !u!114 &2067771065029545098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +204,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5926521509486623358}
     m_Modifications:
+    - target: {fileID: 305601265321271161, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 977201673499176301, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 977201673499176301, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.26
@@ -136,13 +220,29 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.17
       objectReference: {fileID: 0}
+    - target: {fileID: 1110930632342177510, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539971334008114960, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3819163448666324395, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 5926521509486623347}
+    - target: {fileID: 4446405740868266364, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4833364749596182866, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
       propertyPath: m_Name
       value: SpritePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833364749596182866, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4833364749596182868, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
       propertyPath: m_FlipX
@@ -227,6 +327,14 @@ PrefabInstance:
     - target: {fileID: 4833364749596182871, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895876534419326789, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6930526368107762834, guid: ef3e90baa7be0464f964caa6e56e3cd1, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2087616076448410841}
   - component: {fileID: 7399468781771928851}
   - component: {fileID: 8188799154563183480}
-  - component: {fileID: 7999539384744054174}
+  - component: {fileID: -5705294668298120241}
   m_Layer: 0
-  m_Name: pfDamagePopup
+  m_Name: pfPlayerPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2100000, guid: e914007b9dee0474b9fe5fe7e3d75d51, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,14 +102,14 @@ MonoBehaviour:
   m_text: 100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: e914007b9dee0474b9fe5fe7e3d75d51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279309809
-  m_fontColor: {r: 0.94509804, g: 0.08317803, b: 0.06666666, a: 1}
+    rgba: 4279242442
+  m_fontColor: {r: 0.7924528, g: 0.055322148, b: 0.062053207, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -171,7 +171,7 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
---- !u!114 &7999539384744054174
+--- !u!114 &-5705294668298120241
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,6 +180,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1245219446202373391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86cb6cdef83776b488786602679294b2, type: 3}
+  m_Script: {fileID: 11500000, guid: c0f8834b8f470fb4390afdecbaf7a8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

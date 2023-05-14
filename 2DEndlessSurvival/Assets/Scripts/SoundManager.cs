@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager: MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
+    private const string PLAYER_PREFS_SOUND_EFFECTS_VOLUME = "SoundEffectsVolume";
     public static SoundManager Instance { get; private set; }
 
     [SerializeField] private AudioClipRefsSO audioClipRefsSO;
 
+    private float volume = 1f;
+
     private void Awake()
     {
         Instance = this;
+        volume = PlayerPrefs.GetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, 1f);
     }
     private void Start()
     {
@@ -18,8 +22,48 @@ public class SoundManager: MonoBehaviour
         Player.Instance.RangeAttackAction += Player_RangeAttackAction;
         Player.Instance.StrongAttackingAction += Player_StrongAttackingAction;
         PlayerAnimations.Instance.OnAttackDuelDamage += PlayerAnimations_OnAttackDuelDamage;
+        EnemyAI.OnAnyMelleAttack += EnemyAI_OnAnyMelleAttack;
+        EnemyAI.OnAnyShootArrow += EnemyAI_OnAnyShootArrow;
+        EnemyAI.OnAnyDrawBow += EnemyAI_OnAnyDrawBow;
+        EnemyAI.OnAnyMove += EnemyAI_OnAnyMove;
+        Enemy.OnAnyBlockHit += Enemy_OnAnyBlockHit;
+        SkeletonArrow.OnAnyArrowHit += SkeletonArrow_OnAnyArrowHit;
     }
 
+    private void SkeletonArrow_OnAnyArrowHit(object sender, System.EventArgs e)
+    {
+        SkeletonArrow skeletonArrow = sender as SkeletonArrow;
+        PlaySound(audioClipRefsSO.arrowHit, skeletonArrow.transform.position);
+    }
+
+    private void Enemy_OnAnyBlockHit(object sender, System.EventArgs e)
+    {
+        Enemy enemy = sender as Enemy;
+        int randomSound = Random.Range(0, audioClipRefsSO.skeletonBlock.Length);
+        PlaySound(audioClipRefsSO.skeletonBlock, enemy.transform.position, randomSound);
+    }
+    private void EnemyAI_OnAnyMove(object sender, EnemyAI.OnAnyMoveEventArgs e)
+    {
+        EnemyAI enemy = sender as EnemyAI;
+        PlaySound(audioClipRefsSO.skeletonWalking, enemy.transform.position, e.walkingnum);
+    }
+    private void EnemyAI_OnAnyDrawBow(object sender, System.EventArgs e)
+    {
+        EnemyAI enemy = sender as EnemyAI;
+        PlaySound(audioClipRefsSO.skeletonRangeAttack, enemy.transform.position);
+    }
+    private void EnemyAI_OnAnyShootArrow(object sender, System.EventArgs e)
+    {
+        EnemyAI enemy = sender as EnemyAI;
+        int arrowShot = 1;
+        PlaySound(audioClipRefsSO.skeletonRangeAttack, enemy.transform.position, arrowShot);
+    }
+
+    private void EnemyAI_OnAnyMelleAttack(object sender, System.EventArgs e)
+    {
+        EnemyAI enemy = sender as EnemyAI;
+        PlaySound(audioClipRefsSO.skeletonMelleAttack, enemy.transform.position);
+    }
     private void PlayerAnimations_OnAttackDuelDamage(object sender, System.EventArgs e)
     {
         PlaySound(audioClipRefsSO.meleeAttack, Player.Instance.transform.position);
@@ -46,9 +90,9 @@ public class SoundManager: MonoBehaviour
         PlaySound(audioClipArray[num], position, volume);
     }
 
-    private void PlaySound(AudioClip audioClip, Vector3 position, float volume = 1f)
+    private void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplier = 1f)
     {
-        AudioSource.PlayClipAtPoint(audioClip, position, volume);
+        AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplier * volume);
     }
 
     public void PlayWalkingSound(Vector3 position, int num, float volume)
@@ -61,36 +105,19 @@ public class SoundManager: MonoBehaviour
         PlaySound(audioClipRefsSO.running, position, num, volume);
     }
 
-    public void PlayArrowHitSound(Vector3 position)
+    public void ChangeVolume()
     {
-        PlaySound(audioClipRefsSO.arrowHit, position);
+        volume += .1f;
+        if(volume > 1.05f)
+        {
+            volume = 0;
+        }
+        PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, volume);
+        PlayerPrefs.Save();
     }
 
-    public void PlaySkeletonMeeleAttack(Vector3 position)
+    public float GetVolume()
     {
-        PlaySound(audioClipRefsSO.skeletonMelleAttack, position);
-    }
-
-    public void PlaySkeletonDrawBow(Vector3 position)
-    {
-        PlaySound(audioClipRefsSO.skeletonRangeAttack, position);
-    }
-
-    public void PlaySkeletonShotArrow(Vector3 position)
-    {
-        int arrowShot = 1;
-        PlaySound(audioClipRefsSO.skeletonRangeAttack, position, arrowShot);
-    }
-
-    public void PlaySkeletonBlock(Vector3 position)
-    {
-        int randomSound = Random.Range(0, audioClipRefsSO.skeletonBlock.Length);
-        PlaySound(audioClipRefsSO.skeletonBlock, position, randomSound);
-    }
-
-    public void PlayeSkeletonWalking(Vector3 position, int num)
-    {
-        float volume = .3f;
-        PlaySound(audioClipRefsSO.skeletonWalking, position, num, volume);
+        return volume;
     }
 }

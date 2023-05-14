@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
+    public static GameInput Instance { get; private set; }
+
     public event EventHandler<OnToggleShiftEventArgs> OnToggleShift;
+    public event EventHandler<UseItemSlotEventArgs> UseItemSlot;
     public event EventHandler OnJumpAction;
     public event EventHandler OnAttackAction;
     public event EventHandler OnRangeAttackAction;
@@ -14,6 +17,10 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnCastingAttackAction;
     public event EventHandler OnPauseAction;
 
+    public class UseItemSlotEventArgs: EventArgs
+    {
+        public int slot;
+    }
     public class OnToggleShiftEventArgs : EventArgs
     {
         public bool isToggle;
@@ -23,6 +30,7 @@ public class GameInput : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         inputActions = new InputActions();
         inputActions.Player.Enable();
         inputActions.Player.Run.performed += Run_performed;
@@ -33,6 +41,71 @@ public class GameInput : MonoBehaviour
         inputActions.Player.Attack2.performed += Attack2_performed;
         inputActions.Player.CastingAttack.performed += CastingAttack_performed;
         inputActions.Player.Pause.performed += Pause_performed;
+        inputActions.Player.UseItem1.performed += UseItem1_performed;
+        inputActions.Player.UseItem2.performed += UseItem2_performed;
+        inputActions.Player.UseItem3.performed += UseItem3_performed;
+        inputActions.Player.UseItem4.performed += UseItem4_performed;
+        inputActions.Player.UseItem5.performed += UseItem5_performed;
+    }
+
+    private void OnDestroy()
+    {
+        inputActions.Player.Enable();
+        inputActions.Player.Run.performed -= Run_performed;
+        inputActions.Player.Run.canceled -= Run_canceled;
+        inputActions.Player.Jump.performed -= Jump_performed;
+        inputActions.Player.Attack1.performed -= Attack1_performed;
+        inputActions.Player.RangeAttack.performed -= RangeAttack_performed;
+        inputActions.Player.Attack2.performed -= Attack2_performed;
+        inputActions.Player.CastingAttack.performed -= CastingAttack_performed;
+        inputActions.Player.Pause.performed -= Pause_performed;
+        inputActions.Player.UseItem1.performed -= UseItem1_performed;
+        inputActions.Player.UseItem2.performed -= UseItem2_performed;
+        inputActions.Player.UseItem3.performed -= UseItem3_performed;
+        inputActions.Player.UseItem4.performed -= UseItem4_performed;
+        inputActions.Player.UseItem5.performed -= UseItem5_performed;
+
+        inputActions.Dispose();
+    }
+
+    private void UseItem5_performed(InputAction.CallbackContext obj)
+    {
+        UseItemSlot?.Invoke(this, new UseItemSlotEventArgs
+        {
+            slot = 5
+        });
+    }
+
+    private void UseItem4_performed(InputAction.CallbackContext obj)
+    {
+        UseItemSlot?.Invoke(this, new UseItemSlotEventArgs
+        {
+            slot = 4
+        });
+    }
+
+    private void UseItem3_performed(InputAction.CallbackContext obj)
+    {
+        UseItemSlot?.Invoke(this, new UseItemSlotEventArgs
+        {
+            slot = 3
+        });
+    }
+
+    private void UseItem2_performed(InputAction.CallbackContext obj)
+    {
+        UseItemSlot?.Invoke(this, new UseItemSlotEventArgs
+        {
+            slot = 2
+        });
+    }
+
+    private void UseItem1_performed(InputAction.CallbackContext obj)
+    {
+        UseItemSlot?.Invoke(this, new UseItemSlotEventArgs
+        {
+            slot = 1
+        });
     }
 
     private void Pause_performed(InputAction.CallbackContext obj)

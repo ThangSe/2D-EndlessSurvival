@@ -13,6 +13,15 @@ public class EnemyAI : MonoBehaviour
         DodgeAttack,
         BlockAttack,
     }
+    public static EventHandler<OnAnyMoveEventArgs> OnAnyMove;
+    public static EventHandler OnAnyMelleAttack;
+    public static EventHandler OnAnyShootArrow;
+    public static EventHandler OnAnyDrawBow;
+
+    public class OnAnyMoveEventArgs : EventArgs
+    {
+        public int walkingnum;
+    }
 
     public event EventHandler OnAttackAction;
     public event EventHandler OnRangeAttackAction;
@@ -67,7 +76,7 @@ public class EnemyAI : MonoBehaviour
 
     private void EnemyAnimations_OnRangeAttackAction(object sender, EventArgs e)
     {
-        SoundManager.Instance.PlaySkeletonShotArrow(transform.position);
+        OnAnyShootArrow?.Invoke(this, EventArgs.Empty);
         Transform arrowTransform = Instantiate(CommonAssetsUsing.i.pfSkeletonArrow, transform.Find("ArrowPoint").position, Quaternion.identity);
         Vector3 shootDir = new Vector3();
         if (transform.localScale.x == 1)
@@ -83,7 +92,7 @@ public class EnemyAI : MonoBehaviour
 
     private void EnemyAnimations_OnAttackAction(object sender, EventArgs e)
     {
-        SoundManager.Instance.PlaySkeletonMeeleAttack(transform.position);
+        OnAnyMelleAttack?.Invoke(this, EventArgs.Empty);
         Collider2D[] colliderPlayers = Physics2D.OverlapCircleAll(transform.Find("AttackPoint").position, attackRadius, LayerMask.GetMask("Player"));
         Hit(colliderPlayers, normalDamage);
     }
@@ -97,7 +106,10 @@ public class EnemyAI : MonoBehaviour
             footSteepTimer = footSteepTimerMax;
             if (IsWalking() && IsGrounded())
             {
-                SoundManager.Instance.PlayeSkeletonWalking(transform.position, walkingNum);
+                OnAnyMove?.Invoke(this, new OnAnyMoveEventArgs
+                {
+                    walkingnum = walkingNum
+                });
                 walkingNum++;
                 if (walkingNum > 5) walkingNum = stepNumReset;
             }
@@ -122,6 +134,7 @@ public class EnemyAI : MonoBehaviour
                 break;
             case State.ChaseTarget:
                 float facingDir = Player.Instance.GetPosition().x - transform.position.x;
+                bool isFacing = Player.Instance.transform.localScale.x != transform.localScale.x;
                 if (facingDir > 0) transform.localScale = new Vector3(1, 1, 1);
                 if (facingDir < 0) transform.localScale = new Vector3(-1, 1, 1);
                 float distance = Vector3.Distance(transform.position, Player.Instance.GetPosition());
@@ -129,7 +142,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     state = State.DodgeAttack;
                 }
-                if (distance > distancePerformBlock && PlayerAnimations.Instance.isAttacking() && attackRange <= distancePerformMelleAttack)
+                if (distance > distancePerformBlock && PlayerAnimations.Instance.isAttacking() && attackRange <= distancePerformMelleAttack && isFacing)
                 {
                     state = State.BlockAttack;
                 }
@@ -226,7 +239,7 @@ public class EnemyAI : MonoBehaviour
     private IEnumerator CooldownShootingArrow(float delayTime, bool cooldownHit)
     {
         this.cooldownHit = !cooldownHit;
-        SoundManager.Instance.PlaySkeletonDrawBow(transform.position);
+        OnAnyDrawBow?.Invoke(this, EventArgs.Empty);
         OnRangeAttackAction?.Invoke(this, EventArgs.Empty);
         yield return new WaitForSeconds(delayTime);
         this.cooldownHit = cooldownHit;
@@ -290,7 +303,7 @@ public class EnemyAI : MonoBehaviour
 
     private void FindTarget()
     {
-        float targetRange = 15f;
+        float targetRange = 300f;
         if(Vector3.Distance(transform.position, Player.Instance.GetPosition()) < targetRange)
         {
             state = State.ChaseTarget;

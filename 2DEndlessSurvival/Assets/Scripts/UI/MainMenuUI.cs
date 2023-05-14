@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
-    [SerializeField] private Button optionButton;
     [SerializeField] private Button quitButton;
 
     private void Awake()
@@ -15,10 +14,6 @@ public class MainMenuUI : MonoBehaviour
         playButton.onClick.AddListener(() =>
         {
             Loader.Load(Loader.Scene.GameScene);
-        });
-        optionButton.onClick.AddListener(() =>
-        {
-
         });
         quitButton.onClick.AddListener(() =>
         {

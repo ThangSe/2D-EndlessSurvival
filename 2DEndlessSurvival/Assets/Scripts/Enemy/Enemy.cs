@@ -5,6 +5,8 @@ using System;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
+    public static EventHandler OnAnyBlockHit;
+
     public event EventHandler OnAttacked;
     public event EventHandler OnDeath;
     ScoreManager scoreManager;
@@ -12,6 +14,9 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private EnemyAnimations enemyAnimations;
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private EnemiesSO enemiesSO;
+
+    public float minCoinDrop = 8f;
+    public float maxCoinDrop = 13f;
 
     private HealthSystem healthSystem;
     private bool isDeath = false;
@@ -47,6 +52,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void EnemyAnimations_OnDeathAction(object sender, EventArgs e)
     {
+        NormalDrop();
+        AlwaysDrop();
         Destroy(gameObject);
     }
 
@@ -81,12 +88,39 @@ public class Enemy : MonoBehaviour, IDamageable
         }
         if (!isDeath && enemyAnimations.IsProtect())
         {
-            SoundManager.Instance.PlaySkeletonBlock(transform.position);
+            OnAnyBlockHit?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    private void NormalDrop()
+    {
+        int amount = 1;
+        if (UnityEngine.Random.Range(0f, 1f) >= (1 - CommonAssetsUsing.i.commonDropRate))
+        {
+            ItemWorld.EnemyDrop(DropPosition(), Item.CreateItem(Item.ItemType.HealthPotion, amount));
+        }
+        if (UnityEngine.Random.Range(0f, 1f) >= (1 - CommonAssetsUsing.i.commonDropRate))
+        {
+            ItemWorld.EnemyDrop(DropPosition(), Item.CreateItem(Item.ItemType.ManaPotion, amount));
+        }       
+    }
+
+    private void AlwaysDrop()
+    {
+        int amount = Mathf.CeilToInt(UnityEngine.Random.Range(minCoinDrop, maxCoinDrop));
+        if (UnityEngine.Random.Range(0f, 1f) >= (1 - CommonAssetsUsing.i.alwaysDropRate))
+        {
+            ItemWorld.EnemyDrop(DropPosition(), Item.CreateItem(Item.ItemType.CopperCoin, amount));
         }
     }
 
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    private Vector3 DropPosition()
+    {
+        return transform.Find("DropPoint").position;
     }
 }

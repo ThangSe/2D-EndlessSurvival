@@ -6,13 +6,33 @@ using TMPro;
 public class ItemWorld : MonoBehaviour
 {
     public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
-    {
+    {   
         Transform transform = Instantiate(CommonAssetsUsing.i.pfItemWorld, position, Quaternion.identity);
-
         ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
         itemWorld.SetItem(item);
         return itemWorld;
     }
+
+    public static ItemWorld DropItem(Vector3 dropPosition,Item item)
+    {
+        ItemWorld itemWorld = SpawnItemWorld(dropPosition, item);
+        return itemWorld;
+    }
+
+    public static void EnemyDrop(Vector3 dropPosition, Item item)
+    {
+        SpawnItemWorld(GetRandomDropPosition(dropPosition), item);
+    }
+
+    private static Vector3 GetRandomDropPosition(Vector3 dropPosition)
+    {
+        return dropPosition + GetRandomDir() * Random.Range(2f, 0);
+    }
+    public static Vector3 GetRandomDir()
+    {
+        return new Vector3(Random.Range(-1f, 1f), 0).normalized;
+    }
+
     private Item item;
     private SpriteRenderer spriteRenderer;
     private TextMeshPro textMeshPro;

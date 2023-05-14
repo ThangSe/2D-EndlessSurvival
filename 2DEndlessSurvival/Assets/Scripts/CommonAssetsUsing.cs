@@ -17,6 +17,7 @@ public class CommonAssetsUsing : MonoBehaviour
     }
 
     public Transform pfDamagePopup;
+    public Transform pfPlayerPopup;
 
     public Transform pfSkeletonArrow;
 
@@ -24,7 +25,11 @@ public class CommonAssetsUsing : MonoBehaviour
 
     public Sprite weaponSprite;
     public Sprite healthPotionSprite;
-    public Sprite coinSprite;
+    public Sprite manaPotionSprite;
+    public Sprite[] coinSprite;
+    public Sprite emptySprite;
     public Sprite[] monsterPartSprite;
-    public Sprite[] autoDrop;
+
+    public float commonDropRate = .7f;
+    public float alwaysDropRate = 1f;
 }

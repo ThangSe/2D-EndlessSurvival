@@ -1,13 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System;
 
 public class GameOverUI : MonoBehaviour
 {
+    public static GameOverUI Instance { get; private set; }
+
+    public event EventHandler OnRespawnAction;
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button respawnButton;
+
+    private void Awake()
+    {
+        Instance = this;
+        mainMenuButton.onClick.AddListener(() =>
+        {
+            Loader.Load(Loader.Scene.MainMenuScene);
+        });
+        respawnButton.onClick.AddListener(() =>
+        {
+            OnRespawnAction?.Invoke(this, EventArgs.Empty);
+        });
+    }
 
     private void Start()
     {
@@ -34,6 +53,10 @@ public class GameOverUI : MonoBehaviour
     private void Show()
     {
         gameObject.SetActive(true);
+        if(ScoreManager.Instance.GetTotalSilverCoin() <= 0)
+        {
+            transform.Find("RespawnButton").gameObject.SetActive(false);
+        }
     }
 
     private void Hide()
