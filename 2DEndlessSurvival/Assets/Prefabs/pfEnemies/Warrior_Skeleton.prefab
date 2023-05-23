@@ -150,7 +150,7 @@ MonoBehaviour:
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 640
-  moveSpeed: 10
+  moveSpeed: 6
   moveSpeedMultipler: 1
   attackRange: 2
 --- !u!1 &6482290604852965614

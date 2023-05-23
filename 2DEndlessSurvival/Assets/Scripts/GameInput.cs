@@ -16,6 +16,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnStrongAttackAction;
     public event EventHandler OnCastingAttackAction;
     public event EventHandler OnPauseAction;
+    public event EventHandler OpenTutorialMenu;
 
     public class UseItemSlotEventArgs: EventArgs
     {
@@ -46,6 +47,7 @@ public class GameInput : MonoBehaviour
         inputActions.Player.UseItem3.performed += UseItem3_performed;
         inputActions.Player.UseItem4.performed += UseItem4_performed;
         inputActions.Player.UseItem5.performed += UseItem5_performed;
+        inputActions.Player.TutorialMenu.performed += TutorialMenu_performed;
     }
 
     private void OnDestroy()
@@ -64,8 +66,14 @@ public class GameInput : MonoBehaviour
         inputActions.Player.UseItem3.performed -= UseItem3_performed;
         inputActions.Player.UseItem4.performed -= UseItem4_performed;
         inputActions.Player.UseItem5.performed -= UseItem5_performed;
+        inputActions.Player.TutorialMenu.performed -= TutorialMenu_performed;
 
         inputActions.Dispose();
+    }
+
+    private void TutorialMenu_performed(InputAction.CallbackContext obj)
+    {
+        OpenTutorialMenu?.Invoke(this, EventArgs.Empty);
     }
 
     private void UseItem5_performed(InputAction.CallbackContext obj)

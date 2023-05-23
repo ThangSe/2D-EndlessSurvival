@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92517c596d9718b439ed0b1d29f67f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 35
   moveSpeed: 10
 --- !u!58 &5586420582635606699
 CircleCollider2D:
@@ -155,7 +154,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -513706325
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 639825769314155430, guid: 61163ec556dcc9c4fa94eb76949a673f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

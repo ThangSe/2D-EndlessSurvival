@@ -7,6 +7,11 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     public static EventHandler OnAnyBlockHit;
 
+    public static void ResetStaticData()
+    {
+        OnAnyBlockHit = null;
+    }
+
     public event EventHandler OnAttacked;
     public event EventHandler OnDeath;
     ScoreManager scoreManager;

@@ -7,6 +7,11 @@ public class SkeletonArrow : MonoBehaviour
 {
     public static event EventHandler OnAnyArrowHit;
 
+    public static void ResetStaticData()
+    {
+        OnAnyArrowHit = null;
+    }
+
     private Vector3 shootDir;
     [SerializeField] private float moveSpeed = 10f;
 

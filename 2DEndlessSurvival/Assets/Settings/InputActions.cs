@@ -143,6 +143,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""TutorialMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2cfb997-bc3c-49b3-b90c-dcd755a47965"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -332,6 +341,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""UseItem4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8cdce15c-e43f-417c-b8b0-e64dff827d1c"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TutorialMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -353,6 +373,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_UseItem3 = m_Player.FindAction("UseItem3", throwIfNotFound: true);
         m_Player_UseItem4 = m_Player.FindAction("UseItem4", throwIfNotFound: true);
         m_Player_UseItem5 = m_Player.FindAction("UseItem5", throwIfNotFound: true);
+        m_Player_TutorialMenu = m_Player.FindAction("TutorialMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -425,6 +446,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_UseItem3;
     private readonly InputAction m_Player_UseItem4;
     private readonly InputAction m_Player_UseItem5;
+    private readonly InputAction m_Player_TutorialMenu;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -442,6 +464,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @UseItem3 => m_Wrapper.m_Player_UseItem3;
         public InputAction @UseItem4 => m_Wrapper.m_Player_UseItem4;
         public InputAction @UseItem5 => m_Wrapper.m_Player_UseItem5;
+        public InputAction @TutorialMenu => m_Wrapper.m_Player_TutorialMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -490,6 +513,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @UseItem5.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem5;
                 @UseItem5.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem5;
                 @UseItem5.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem5;
+                @TutorialMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTutorialMenu;
+                @TutorialMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTutorialMenu;
+                @TutorialMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTutorialMenu;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -533,6 +559,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @UseItem5.started += instance.OnUseItem5;
                 @UseItem5.performed += instance.OnUseItem5;
                 @UseItem5.canceled += instance.OnUseItem5;
+                @TutorialMenu.started += instance.OnTutorialMenu;
+                @TutorialMenu.performed += instance.OnTutorialMenu;
+                @TutorialMenu.canceled += instance.OnTutorialMenu;
             }
         }
     }
@@ -552,5 +581,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnUseItem3(InputAction.CallbackContext context);
         void OnUseItem4(InputAction.CallbackContext context);
         void OnUseItem5(InputAction.CallbackContext context);
+        void OnTutorialMenu(InputAction.CallbackContext context);
     }
 }

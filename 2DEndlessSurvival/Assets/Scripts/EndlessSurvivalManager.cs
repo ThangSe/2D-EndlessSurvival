@@ -21,7 +21,6 @@ public class EndlessSurvivalManager : MonoBehaviour
     }
 
     private State state;
-    private float waitingToStartTimer = 1f;
     private float gamePlayingTimer;
     private float dayTimerNow;
     private float dayTimerMax = 30f;
@@ -39,11 +38,18 @@ public class EndlessSurvivalManager : MonoBehaviour
     {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
         GameOverUI.Instance.OnRespawnAction += GameOver_OnRespawnAction;
+        GameInput.Instance.OpenTutorialMenu += GameInput_OpenTutorialMenu;
+    }
+
+    private void GameInput_OpenTutorialMenu(object sender, EventArgs e)
+    {
+        state = State.GamePlaying;
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void GameOver_OnRespawnAction(object sender, EventArgs e)
     {
-        state = State.WaitingToStart;
+        state = State.GamePlaying;
     }
 
     private void GameInput_OnPauseAction(object sender, EventArgs e)
@@ -56,12 +62,6 @@ public class EndlessSurvivalManager : MonoBehaviour
         switch (state)
         {
             case State.WaitingToStart:
-                waitingToStartTimer -= Time.deltaTime;
-                if (waitingToStartTimer < 0f)
-                {                    
-                    state = State.GamePlaying;
-                    OnStateChanged?.Invoke(this, EventArgs.Empty);
-                }
                 break;
             case State.GamePlaying:
                 gamePlayingTimer += Time.deltaTime;

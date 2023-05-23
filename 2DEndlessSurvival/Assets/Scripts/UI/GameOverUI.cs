@@ -25,6 +25,7 @@ public class GameOverUI : MonoBehaviour
         respawnButton.onClick.AddListener(() =>
         {
             OnRespawnAction?.Invoke(this, EventArgs.Empty);
+            Hide();
         });
     }
 

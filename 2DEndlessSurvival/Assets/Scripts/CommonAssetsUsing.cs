@@ -30,6 +30,6 @@ public class CommonAssetsUsing : MonoBehaviour
     public Sprite emptySprite;
     public Sprite[] monsterPartSprite;
 
-    public float commonDropRate = .7f;
+    public float commonDropRate = .9f;
     public float alwaysDropRate = 1f;
 }

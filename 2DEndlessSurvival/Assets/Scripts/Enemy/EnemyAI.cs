@@ -18,6 +18,14 @@ public class EnemyAI : MonoBehaviour
     public static EventHandler OnAnyShootArrow;
     public static EventHandler OnAnyDrawBow;
 
+    public static void ResetStaticData()
+    {
+        OnAnyMove = null;
+        OnAnyMelleAttack = null;
+        OnAnyShootArrow = null;
+        OnAnyDrawBow = null;
+    }
+
     public class OnAnyMoveEventArgs : EventArgs
     {
         public int walkingnum;
@@ -235,7 +243,6 @@ public class EnemyAI : MonoBehaviour
             rigidBody2D.MovePosition(rigidBody2D.position + movementVector * Time.fixedDeltaTime);
         }
     }
-
     private IEnumerator CooldownShootingArrow(float delayTime, bool cooldownHit)
     {
         this.cooldownHit = !cooldownHit;
@@ -320,7 +327,7 @@ public class EnemyAI : MonoBehaviour
 
     public bool IsGrounded()
     {
-        RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCillider2D.bounds.center, boxCillider2D.bounds.size, 0f, Vector2.down, .2f, platformsLayerMask);
+        RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCillider2D.bounds.center, boxCillider2D.bounds.size, 0f, Vector2.down, .1f, platformsLayerMask);
         return raycastHit2d.collider != null;
     }
 
