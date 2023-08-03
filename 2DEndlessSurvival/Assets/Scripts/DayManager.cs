@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class DayManager : MonoBehaviour
 {
-    [SerializeField] private Light2D globalLight;
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D globalLight;
     [SerializeField] private Image endDayTime;
     [SerializeField] private Image dayTime;
     [SerializeField] private Image timerOfDay;
